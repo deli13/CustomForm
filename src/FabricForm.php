@@ -39,7 +39,6 @@ class FabricForm
     public function prepareForm(array $req_data)
     {
         if (array_key_exists($this->field_name_form, $req_data)) {
-
             $this->form = new $this->form_classes[$req_data[$this->field_name_form]];
             if(!($this->form instanceof FormInterface)){
                 throw new BadFormException("Class does not implement "+FormInterface::class);
