@@ -35,16 +35,20 @@ class FabricForm
     /**
      * Загрузка данных формы
      * @param array $req_data
+     * @throws BadFormException
      */
     public function prepareForm(array $req_data)
     {
-        if (array_key_exists($this->field_name_form, $req_data)) {
+        if (array_key_exists($this->field_name_form, $req_data) && array_key_exists($req_data[$this->field_name_form], $this->form_classes)) {
             $this->form = new $this->form_classes[$req_data[$this->field_name_form]];
-            if(!($this->form instanceof FormInterface)){
-                throw new BadFormException("Class does not implement "+FormInterface::class);
+            if (!($this->form instanceof FormInterface)) {
+                throw new BadFormException("Class does not implement " . FormInterface::class);
             }
             $this->form->loadData($req_data);
+        } else {
+            throw new BadFormException("Form not found");
         }
+
     }
 
     /**
@@ -59,7 +63,6 @@ class FabricForm
     /**
      * Загрузка списка форм
      * @param array $form_list
-     * @throws BadFormException
      */
     public function setFormList(array $form_list)
     {

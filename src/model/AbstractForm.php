@@ -20,6 +20,10 @@ abstract class AbstractForm implements FormInterface
     public $to;
     protected $set_theme;
 
+    /**
+     * Загрузка данных в форму
+     * @param array $arr
+     */
     public function loadData(array $arr)
     {
         foreach ($arr as $key => $value) {
@@ -32,11 +36,19 @@ abstract class AbstractForm implements FormInterface
         $this->init();
     }
 
+    /**
+     * Установка списка адресатов сообщений с формы
+     * @param array $to
+     */
     public function setTo(array $to)
     {
         $this->to = $to;
     }
 
+    /**
+     * Установка темы
+     * @param string $theme
+     */
     public function setTheme(string $theme)
     {
         $this->set_theme = $theme;

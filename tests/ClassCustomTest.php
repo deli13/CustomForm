@@ -28,6 +28,27 @@ class ClassCustomTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($fabric->send());
     }
 
+    public function testBadForm(){
+        $this->expectException(\deli13\CustomForm\errors\BadFormException::class);
+        $fabric=new \deli13\CustomForm\FabricForm();
+        $fabric->setFormList([
+            "asd"=>CustomForm::class
+        ]);
+        $fabric->setSender(function ($to,$theme,$message){
+            print_r($to);
+            print_r($theme);
+            print_r($message);
+            return true;
+        });
+        $fabric->prepareForm([
+            "FORM_NAME"=>"test",
+            "name"=>"name_field",
+            "message"=>"message_field"
+        ]);
+        $fabric->setTo(["test@test.ru"]);
+        $fabric->send();
+    }
+
 }
 
 class CustomForm extends \deli13\CustomForm\model\AbstractForm
