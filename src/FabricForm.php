@@ -28,7 +28,8 @@ class FabricForm
      * Установка Функции отправки
      * @param \Closure $function
      */
-    public function setSender(\Closure $function){
+    public function setSender(\Closure $function)
+    {
         EmailSender::getInstance()->setSender($function);
     }
 
@@ -36,15 +37,17 @@ class FabricForm
      * Загрузка данных формы
      * @param array $req_data
      */
-    public function prepareForm(array $req_data){
+    public function prepareForm(array $req_data)
+    {
         if (array_key_exists($this->field_name_form, $req_data)) {
             $this->form = new $this->form_classes[$req_data[$this->$field_name_form]];
             $this->form->loadData($req_data);
         }
     }
 
-    public function setFieldNameForm(string $name){
-        $this->field_name_form=$name;
+    public function setFieldNameForm(string $name)
+    {
+        $this->field_name_form = $name;
     }
 
     /**
@@ -52,13 +55,14 @@ class FabricForm
      * @param array $form_list
      * @throws BadFormException
      */
-    public function setFormList(array $form_list){
-        foreach ($form_list as $key=>$form){
-            if(!($form instanceof FormInterface)){
-                throw new BadFormException("Форма не реализует интерфейс ".FormInterface::class);
+    public function setFormList(array $form_list)
+    {
+        foreach ($form_list as $key => $form) {
+            if (!($form instanceof FormInterface)) {
+                throw new BadFormException("Форма не реализует интерфейс " . FormInterface::class);
             }
         }
-        $this->form_classes=$form_list;
+        $this->form_classes = $form_list;
     }
 
     /**
@@ -75,12 +79,6 @@ class FabricForm
      */
     public function send()
     {
-//        $form = $this->form;
-        /** @var FormUploadFile|FormInterface $form */
-//        if ($form instanceof FormUploadFile) {
-//            return $form->sendFile();
-//        } else {
         return $this->form->send();
-//        }
     }
 }

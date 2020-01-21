@@ -14,7 +14,7 @@
     },
     "autoload": {
         "psr-4": {
-            "deli13\\CustomForm": "src/"
+            "deli13\\CustomForm\\": "src/"
         }
     }
 }

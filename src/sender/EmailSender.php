@@ -6,6 +6,10 @@ namespace deli13\CustomForm\sender;
 
 use deli13\CustomForm\errors\SenderNotSetException;
 
+/**
+ * Class EmailSender
+ * @package deli13\CustomForm\sender
+ */
 class EmailSender
 {
 
@@ -21,7 +25,7 @@ class EmailSender
     }
 
     /**
-     * @param mixed $sender
+     * @param \Closure $sender
      */
     public function setSender(\Closure $sender): void
     {

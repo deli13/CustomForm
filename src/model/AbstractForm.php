@@ -16,7 +16,7 @@ use deli13\CustomForm\sender\EmailSender;
 abstract class AbstractForm implements FormInterface
 {
 
-    public $message="";
+    public $message = "";
     public $to;
     protected $set_theme;
 
@@ -37,8 +37,9 @@ abstract class AbstractForm implements FormInterface
         $this->to = $to;
     }
 
-    public function setTheme(string $theme){
-        $this->set_theme=$theme;
+    public function setTheme(string $theme)
+    {
+        $this->set_theme = $theme;
     }
 
     /**
@@ -50,6 +51,6 @@ abstract class AbstractForm implements FormInterface
     {
         $message = $this->createMessage();
         $this->writeDatabase();
-        return EmailSender::getInstance()->send($this->to,$this->set_theme,$message);
+        return EmailSender::getInstance()->send($this->to, $this->set_theme, $message);
     }
 }
