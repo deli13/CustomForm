@@ -15,7 +15,6 @@ use deli13\CustomForm\sender\EmailSender;
  * @property  FormInterface[] $form_classes
  * @package deli13\CustomForm
  * @property AbstractForm $form
- *
  */
 class FabricForm
 {

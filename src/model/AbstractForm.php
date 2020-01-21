@@ -26,7 +26,7 @@ abstract class AbstractForm implements FormInterface
             try {
                 $this->$key = $value;
             } catch (\Exception $exception) {
-                loader()->logger()->sendLog($exception);
+
             }
         }
         $this->init();
