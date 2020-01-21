@@ -39,11 +39,19 @@ class FabricForm
     public function prepareForm(array $req_data)
     {
         if (array_key_exists($this->field_name_form, $req_data)) {
+
             $this->form = new $this->form_classes[$req_data[$this->$field_name_form]];
+            if(!($this->form instanceof FormInterface)){
+                throw new BadFormException("Class ". $this->form::class ." does not implement "+FormInterface::class);
+            }
             $this->form->loadData($req_data);
         }
     }
 
+    /**
+     * Установка поля с именем формы
+     * @param string $name
+     */
     public function setFieldNameForm(string $name)
     {
         $this->field_name_form = $name;
@@ -56,11 +64,6 @@ class FabricForm
      */
     public function setFormList(array $form_list)
     {
-        foreach ($form_list as $key => $form) {
-            if (!($form instanceof FormInterface)) {
-                throw new BadFormException("Форма не реализует интерфейс " . FormInterface::class);
-            }
-        }
         $this->form_classes = $form_list;
     }
 
