@@ -40,12 +40,13 @@ class EmailSender
      * @return mixed
      * @throws SenderNotSetException
      */
-    public function send($to,$theme,$message){
-        if($this->sender instanceof \Closure){
-            return $this->sender($to,$theme,$message);
+    public function send($to, $theme, $message)
+    {
+        if ($this->sender instanceof \Closure) {
+            return call_user_func($this->sender, $to, $theme, $message);
         } else {
             throw new SenderNotSetException("Не установлена функция отправки почты");
         }
-
     }
+
 }
