@@ -42,7 +42,7 @@ class FabricForm
 
             $this->form = new $this->form_classes[$req_data[$this->$field_name_form]];
             if(!($this->form instanceof FormInterface)){
-                throw new BadFormException("Class ". $this->form::class ." does not implement "+FormInterface::class);
+                throw new BadFormException("Class does not implement "+FormInterface::class);
             }
             $this->form->loadData($req_data);
         }
